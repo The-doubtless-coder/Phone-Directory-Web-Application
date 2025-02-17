@@ -14,8 +14,100 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
+
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>jstl</artifactId>
+      <version>1.2</version>
+    </dependency>
+
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>4.0.1</version> <!-- Use the latest version -->
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.18.28</version>
+    </dependency>
+
+    <!-- JAX-WS API (javax.xml.ws) -->
+    <dependency>
+      <groupId>javax.xml.ws</groupId>
+      <artifactId>jaxws-api</artifactId>
+      <version>2.3.1</version>
+    </dependency>
+
+    <!-- JAX-WS Implementation (Metro Reference Implementation) -->
+    <dependency>
+      <groupId>com.sun.xml.ws</groupId>
+      <artifactId>jaxws-rt</artifactId>
+      <version>2.3.3</version>
+    </dependency>
+
+    <!-- JAXB API (required for XML processing) -->
+    <dependency>
+      <groupId>javax.xml.bind</groupId>
+      <artifactId>jaxb-api</artifactId>
+      <version>2.3.1</version>
+    </dependency>
+
+    <!-- JAXB Reference Implementation -->
+    <dependency>
+      <groupId>org.glassfish.jaxb</groupId>
+      <artifactId>jaxb-runtime</artifactId>
+      <version>2.3.1</version>
+    </dependency>
+
+<!--    rest client to make rest calls to the provider-->
+    <dependency>
+      <groupId>org.glassfish.jersey.core</groupId>
+      <artifactId>jersey-client</artifactId>
+      <version>2.34</version>
+    </dependency>
+
+    <!--    json body writer for jersey-->
+    <dependency>
+      <groupId>org.glassfish.jersey.media</groupId>
+      <artifactId>jersey-media-json-jackson</artifactId>
+      <version>2.35</version> <!-- Use the latest version -->
+    </dependency>
+<!--    <dependency>-->
+<!--      <groupId>org.glassfish.jersey.core</groupId>-->
+<!--      <artifactId>jersey-common</artifactId>-->
+<!--      <version>2.29.1</version>  &lt;!&ndash; Ensure version is compatible &ndash;&gt;-->
+<!--    </dependency>-->
+    <!--    jersey injection dependency-->
+    <dependency>
+      <groupId>org.glassfish.jersey.inject</groupId>
+      <artifactId>jersey-hk2</artifactId>
+      <version>2.29.1</version>
+    </dependency>
+
   </dependencies>
   <build>
     <finalName>PhoneDirectoryWebApp</finalName>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>jaxws-maven-plugin</artifactId>
+        <version>2.6</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>wsimport</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <wsdlUrls>
+            <wsdlUrl>http://localhost:8080/Contact_Registry_Web_App_war/ws/contacts?wsdl</wsdlUrl>
+          </wsdlUrls>
+        </configuration>
+      </plugin>
+    </plugins>
   </build>
 </project>
